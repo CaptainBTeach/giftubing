@@ -32,6 +32,8 @@ class Facemesher():
         self.eye_cutoff = CUTOFF_VALUE_FOR_GAUSSIAN_EYE_STATUS
         self.mouth_open_cutoff = CUTOFF_VALUE_FOR_MOUTH_OPEN
         self.mouth_wide_open_cutoff = CUTOFF_VALUE_FOR_MOUTH_WIDE_OPEN
+        if self.mouth_wide_open_cutoff < self.mouth_open_cutoff:
+            raise ValueError(f"Invalid value: CUTOFF_VALUE_FOR_MOUTH_OPEN must be less than CUTOFF_VALUE_FOR_MOUTH_WIDE_OPEN")
         self.is_mouth_open = False
         self.is_mouth_wide = False
         self.is_right_eye_open = True

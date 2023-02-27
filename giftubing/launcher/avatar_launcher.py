@@ -4,7 +4,6 @@ import sys
 from itertools import product
 
 import keyboard
-from win32api import GetSystemMetrics
 from torch import cuda
 from facenet_pytorch import MTCNN
 import cv2
@@ -286,7 +285,10 @@ class WindowTube(QMainWindow):
             print(f"Unable to find folder giftubing_avatars inside folder:")
             print(f"{os.path.basename(os.path.abspath(dir_path))}")
             print(f"Full path: \n{dir_path}")
-            print(f"Contains: {os.listdir(dir_path)}")
+            try:
+                print(f"Contains: {os.listdir(dir_path)}")
+            except FileNotFoundError:
+                print(f"No file in {dir_path}")
             self.destroy()
             sys.exit()
 
@@ -325,7 +327,7 @@ class WindowTube(QMainWindow):
             quit()
 
         print("setting window shape, size, position")
-        ws, hs = GetSystemMetrics(0), GetSystemMetrics(1)
+        ws, hs = QApplication.instance().primaryScreen().size().toTuple()
         w, h = image.width(), image.height()
         x = ws - w
         y = hs - h

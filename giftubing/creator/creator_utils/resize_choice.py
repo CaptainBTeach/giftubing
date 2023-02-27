@@ -23,7 +23,7 @@ def get_resize_input(img_shape):
         height = input("input height (enter to keep ratio):")
         if height == "":
             height = (img_shape[1] * width) / img_shape[0]
-            print("width unchanged")
+            print("height to width ration kept")
             height_is_chosen = True
         try:
             height = int(height)
